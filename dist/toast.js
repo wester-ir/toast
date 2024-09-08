@@ -48,7 +48,7 @@ const toast = {
         const elemContentContainer = document.createElement('div');
         const elemContent = document.createElement('div');
         const elemButtons = document.createElement('div');
-        const elemClose = document.createElement('div');
+        const elemClose = this._createCloseButton(elem);
 
         elem.id = random(10);
         elem.classList.add('toast-message', ...opt.type.split(' '));
@@ -56,12 +56,7 @@ const toast = {
         elemContent.classList.add('toast-content');
         elemContent.innerText = message;
         elemButtons.className = 'toast-buttons';
-        elemClose.classList.add('toast-close');
-        elemClose.addEventListener('click', () => {
-            this.dismiss(elem);
-        });
-        elemClose.innerHTML = '<svg class="svg-icon" style="width: 10px; height: 10px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M895.156706 86.256941a30.177882 30.177882 0 0 1 42.767059-0.180706c11.745882 11.745882 11.745882 30.870588-0.180706 42.767059L128.843294 937.743059c-11.866353 11.866353-30.930824 12.047059-42.767059 0.180706-11.745882-11.745882-11.745882-30.870588 0.180706-42.767059L895.156706 86.256941z" fill="#000000" /><path d="M86.076235 86.076235c11.745882-11.745882 30.870588-11.745882 42.767059 0.180706l808.899765 808.899765c11.866353 11.866353 12.047059 30.930824 0.180706 42.767059-11.745882 11.745882-30.870588 11.745882-42.767059-0.180706L86.256941 128.843294a30.177882 30.177882 0 0 1-0.180706-42.767059z" fill="#000000" /><path d="M0 0h1024v1024H0z" fill="#FFF4F4" fill-opacity="0" /></svg>';
-
+        
         elemContentContainer.appendChild(elemContent);
         elemContainer.appendChild(elemContentContainer);
 
@@ -108,6 +103,16 @@ const toast = {
         return {
             dismiss: (delay) => this.dismiss(elem, delay),
         };
+    },
+
+    _createCloseButton(elem) {
+        const btn = document.createElement('div');
+
+        btn.classList.add('toast-close');
+        btn.addEventListener('click', () => this.dismiss(elem));
+        btn.innerHTML = '<svg class="svg-icon" style="width: 10px; height: 10px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M895.156706 86.256941a30.177882 30.177882 0 0 1 42.767059-0.180706c11.745882 11.745882 11.745882 30.870588-0.180706 42.767059L128.843294 937.743059c-11.866353 11.866353-30.930824 12.047059-42.767059 0.180706-11.745882-11.745882-11.745882-30.870588 0.180706-42.767059L895.156706 86.256941z" fill="#000000" /><path d="M86.076235 86.076235c11.745882-11.745882 30.870588-11.745882 42.767059 0.180706l808.899765 808.899765c11.866353 11.866353 12.047059 30.930824 0.180706 42.767059-11.745882 11.745882-30.870588 11.745882-42.767059-0.180706L86.256941 128.843294a30.177882 30.177882 0 0 1-0.180706-42.767059z" fill="#000000" /><path d="M0 0h1024v1024H0z" fill="#FFF4F4" fill-opacity="0" /></svg>';
+
+        return btn;
     },
 
     default(message, opt = {}) {
