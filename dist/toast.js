@@ -1,7 +1,7 @@
 /**
  * The Toast notification library.
  *
- * @github  https://github.com/weska-ir/toast
+ * @github  https://github.com/wester-ir/toast
  * @version 1.0
  */
 const toast = {
