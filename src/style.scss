@@ -1,6 +1,6 @@
 .toast {
     &.toast-container {
-        @apply fixed top-4 left-4 z-[10000] right-4 md:right-auto;
+        @apply fixed top-4 start-4 z-[10000] end-4 md:end-auto;
     }
 
     > .toast-message {
