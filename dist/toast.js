@@ -2,7 +2,7 @@
  * The Toast notification library.
  *
  * @github  https://github.com/wester-ir/toast
- * @version 1.0
+ * @version 1.1
  */
 const toast = {
     elements: {
@@ -21,13 +21,18 @@ const toast = {
         });
     },
 
+    changeDir(dir) {
+        this.elements.container.classList.remove('auto-direction', 'ltr-direction', 'rtl-direction');
+        this.elements.container.classList.add(dir + '-direction');
+    },
+
     whenReady(fn) {
         if (document.readyState !== 'loading') {
             fn();
-    
+
             return;
         }
-    
+
         document.addEventListener('DOMContentLoaded', fn);
     },
 
@@ -41,6 +46,7 @@ const toast = {
             dismissAfter: null,
             showCloseButton: true,
             buttons: [],
+            dir: 'auto',
         }, opt);
 
         const elem = document.createElement('div');
@@ -51,12 +57,12 @@ const toast = {
         const elemClose = this._createCloseButton(elem);
 
         elem.id = random(10);
-        elem.classList.add('toast-message', ...opt.type.split(' '));
+        elem.classList.add('toast-message', ...opt.type.split(' '), opt.dir +'-direction');
         elemContentContainer.classList.add('toast-content-container');
         elemContent.classList.add('toast-content');
         elemContent.innerText = message;
         elemButtons.className = 'toast-buttons';
-        
+
         elemContentContainer.appendChild(elemContent);
         elemContainer.appendChild(elemContentContainer);
 
